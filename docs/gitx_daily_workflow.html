@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GitX 하루 작업 루틴 & 버전 전략 — root</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Pretendard,Apple SD Gothic Neo,sans-serif;line-height:1.6;margin:24px;max-width:920px}
+  h1,h2{line-height:1.2}
+  code,kbd{font-family:ui-monospace,Consolas,Monaco,monospace;background:#f6f7f8;border:1px solid #e5e7eb;border-radius:6px;padding:.1em .35em}
+  pre{background:#f6f7f8;border:1px solid #e5e7eb;border-radius:8px;padding:12px;overflow:auto}
+  table{width:100%;border-collapse:collapse;margin:12px 0}
+  th,td{border:1px solid #e5e7eb;padding:8px;text-align:left}
+  th{background:#fafafa}
+  .pill{display:inline-block;border:1px solid #d1d5db;border-radius:999px;padding:.15em .65em;font-size:.85em;background:#fff}
+  .muted{color:#6b7280}
+  .grid{display:grid;gap:12px}
+  .card{border:1px solid #e5e7eb;border-radius:10px;padding:14px}
+</style>
+</head><body>
+<h1>GitX 하루 작업 루틴 &amp; 버전 전략</h1>
+<p class="muted">프로젝트: <span class="pill">root</span> · 브랜치: <span class="pill">series/1.x</span> · 시리즈: <span class="pill">series/1.x</span> · VERSION: <span class="pill">0.1.0</span></p>
+
+<h2>하루 작업 루틴</h2>
+<table>
+  <thead><tr><th>시점</th><th>명령어</th><th>설명</th><th>목적</th></tr></thead>
+  <tbody>
+    <tr><td>아침 시작</td><td><code>git pull</code><br><code>gitx status</code></td><td>원격 최신 코드/상태 점검</td><td>시작점 세팅</td></tr>
+    <tr><td>작업 중</td><td><code>gitx q</code></td><td>빠른 백업(자동 메시지)</td><td>안전 스냅샷</td></tr>
+    <tr><td>작업 중</td><td><code>gitx save "메시지"</code></td><td>정상 백업(메시지 기록)</td><td>의미 기록</td></tr>
+    <tr><td>중간 점검</td><td><code>gitx log 10</code></td><td>최근 커밋 확인</td><td>흐름 파악</td></tr>
+    <tr><td>기능 완성</td><td><code>gitx series-bump</code></td><td>버전 증가(patch/minor/major)</td><td>이정표</td></tr>
+    <tr><td>마감 전</td><td><code>gitx status</code></td><td>잔여 변경/상태 점검</td><td>정리</td></tr>
+    <tr><td>퇴근</td><td><code>git push</code></td><td>원격 동기화</td><td>안전 보관</td></tr>
+  </tbody>
+</table>
+
+<h2>버전 관리 전략</h2>
+<div class="grid">
+  <div class="card">
+    <strong>라인</strong>
+    <ul>
+      <li><code>main</code>: 항상 배포 가능한 안정 라인</li>
+      <li><code>series/N.x</code>: 메이저 N 개발 줄기</li>
+      <li><code>feat/*</code>: 기능 단위 실험/작업</li>
+    </ul>
+  </div>
+  <div class="card">
+    <strong>키 포인트</strong>
+    <ul>
+      <li><code>VERSION</code> 파일로 현재 버전 관리</li>
+      <li><code>git tag vX.Y.Z</code>로 배포/스냅샷</li>
+      <li>안정화되면 <code>main</code>에 승격</li>
+    </ul>
+  </div>
+</div>
+
+<h2>예제 시나리오</h2>
+<pre>
+# 빠른 저장
+gitx q
+# 의미 기록
+gitx save "feat: 로또 추천 개선"
+# 서브 릴리스
+gitx series-tag
+# 메인 승격
+gitx series-promote
+# 다음 메이저 시작
+gitx series-next
+</pre>
+
+<p class="muted">생성시각: 2025-08-16 16:55:38</p>
+</body></html>
